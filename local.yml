@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+---
+#This block exists to do nothing but be interpreted as Bash
+#Still working on the command not found messages
+- hosts: none
+  tasks:
+  - debug:
+      msg: |+ 
+        apt install -y python3-pip
+        pip3 install ansible
+        /usr/bin/env ansible-playbook "$0"
+        exit #needed or we get errors for all following lines
+
+- name: Setup Host
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  tasks:
+  - name: Test
+    debug:
+      msg: This is only a test.
